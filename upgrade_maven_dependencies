@@ -109,7 +109,9 @@ function mvn_dep_updates() {
 function mvn_property_updates() {
   local tmp_file
   tmp_file="$(mktemp)"
+  set -o pipefail
   MAVEN_OPTS="${MAVEN_COLOR_MAVEN_OPTS}" mvn "$MAVEN_COLOR_ARG" versions:display-property-updates "${mvn_online_offline_args[@]}" "$@" | grep -Ev "$MAVEN_EXCLUDE_ARTIFACT_RESOLUTION_MESSAGES" | tee "$tmp_file"
+  set +o pipefail
   if grep -q 'All version properties are referencing the newest version available.' "$tmp_file"; then
     rm "$tmp_file"
     return 1
