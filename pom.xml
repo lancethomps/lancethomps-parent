@@ -644,7 +644,6 @@
               <configuration>
                 <cacheFile>${project.basedir}/checkstyle-cachefile</cacheFile>
                 <configLocation>checkstyle/java-checkstyle.xml</configLocation>
-                <suppressionsLocation>checkstyle/java-suppressions.xml</suppressionsLocation>
                 <includeResources>false</includeResources>
                 <includeTestSourceDirectory>true</includeTestSourceDirectory>
                 <includes>**/*.java</includes>
@@ -660,7 +659,6 @@
               <configuration>
                 <cacheFile>${project.basedir}/checkstyle-cachefile-import-control-only</cacheFile>
                 <configLocation>checkstyle/java-checkstyle-import-control-only.xml</configLocation>
-                <suppressionsLocation>checkstyle/java-suppressions.xml</suppressionsLocation>
                 <includeResources>false</includeResources>
                 <includeTestSourceDirectory>true</includeTestSourceDirectory>
                 <includes>**/*.java</includes>
@@ -676,7 +674,6 @@
               <configuration>
                 <cacheFile>${project.basedir}/checkstyle-cachefile-non-java</cacheFile>
                 <configLocation>checkstyle/non-java-checkstyle.xml</configLocation>
-                <suppressionsLocation>checkstyle/non-java-suppressions.xml</suppressionsLocation>
                 <includeResources>false</includeResources>
                 <includeTestSourceDirectory>false</includeTestSourceDirectory>
                 <outputFile>${project.build.directory}/checkstyle-report-non-java.xml</outputFile>
