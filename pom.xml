@@ -41,7 +41,24 @@
       <id>ossrh</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
+    <repository>
+      <id>sonatype-releases</id>
+      <url>https://oss.sonatype.org/content/repositories/releases</url>
+    </repository>
   </distributionManagement>
+
+  <repositories>
+    <repository>
+      <id>sonatype-releases</id>
+      <url>https://oss.sonatype.org/content/repositories/releases</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
 
   <modules>
     <module>modules/lancethomps-build-tools</module>
