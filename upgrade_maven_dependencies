@@ -1,0 +1,147 @@
+#!/usr/bin/env bash
+################################################################### SETUP ########################################################################
+set -o errexit -o errtrace -o nounset
+##################################################################################################################################################
+
+EXCLUDE_DEPENDENCIES=(
+  commons-collections:commons-collections
+  com.opencsv:opencsv
+  org.apache.poi
+  org.springframework
+)
+
+EXCLUDE_PROPERTIES=(
+  version.opencsv
+  version.poi
+  version.spring
+)
+
+mvn_online_offline_args=(-U)
+
+################################################################### USAGE ########################################################################
+_SCRIPT_NAME="$(basename "$0")"
+
+function _usage() {
+  cat << EOF
+NAME
+       ${_SCRIPT_NAME}
+
+SYNOPSIS
+       ${_SCRIPT_NAME} [--help] [--debug] [--verbose] [--offline]
+
+EXAMPLES
+       ${_SCRIPT_NAME}
+       ${_SCRIPT_NAME} --offline
+EOF
+}
+##################################################################################################################################################
+
+################################################################# SCRIPTARGS #####################################################################
+while test $# -gt 0; do
+  case "$1" in
+    -h | --help)
+      _usage
+      exit 0
+      ;;
+    --debug)
+      export debug_mode=true
+      shift
+      ;;
+    --verbose)
+      export verbose=true
+      shift
+      ;;
+    --offline)
+      mvn_online_offline_args=(-B)
+      shift
+      ;;
+    --)
+      shift
+      break
+      ;;
+    -*)
+      echo "Unknown option: $1"
+      _usage
+      exit 1
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
+##################################################################################################################################################
+
+################################################################### MVN FUNCS ####################################################################
+function confirm() {
+  local response=""
+  read -r -p "${1:-Are you sure?}"$'\n'"[Y/n]> " response
+  case "$response" in
+    [yY][eE][sS] | [yY] | "") true ;;
+    [nN][oO] | [nN]) false ;;
+    *)
+      echo_error "Incorrect value entered... Try again."
+      confirm "$@"
+      ;;
+  esac
+}
+function echo_with_sep() {
+  echo "---------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+  echo "$@"
+  echo "---------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+}
+function join_by() {
+  local d="$1"
+  shift
+  echo -n "$1"
+  shift
+  printf "%s" "${@/#/$d}"
+}
+
+export MAVEN_EXCLUDE_ARTIFACT_RESOLUTION_MESSAGES='(checking for updates from|Downloading from |Downloaded from |Major version changes allowed)'
+export MAVEN_COLOR_ARG="-Dstyle.color=always"
+export MAVEN_COLOR_MAVEN_OPTS="-Djansi.force=true"
+
+# shellcheck disable=SC2120
+function mvn_dep_updates() {
+  MAVEN_OPTS="${MAVEN_COLOR_MAVEN_OPTS}" mvn "$MAVEN_COLOR_ARG" versions:display-dependency-updates "${mvn_online_offline_args[@]}" "$@" | grep -Ev "$MAVEN_EXCLUDE_ARTIFACT_RESOLUTION_MESSAGES"
+}
+# shellcheck disable=SC2120
+function mvn_property_updates() {
+  local tmp_file
+  tmp_file="$(mktemp)"
+  MAVEN_OPTS="${MAVEN_COLOR_MAVEN_OPTS}" mvn "$MAVEN_COLOR_ARG" versions:display-property-updates "${mvn_online_offline_args[@]}" "$@" | grep -Ev "$MAVEN_EXCLUDE_ARTIFACT_RESOLUTION_MESSAGES" | tee "$tmp_file"
+  if grep -q 'All version properties are referencing the newest version available.' "$tmp_file"; then
+    rm "$tmp_file"
+    return 1
+  fi
+  rm "$tmp_file"
+  return 0
+}
+# shellcheck disable=SC2120
+function mvn_upgrade_deps() {
+  MAVEN_OPTS="${MAVEN_COLOR_MAVEN_OPTS}" mvn "$MAVEN_COLOR_ARG" -B versions:use-latest-releases -DgenerateBackupPoms=false "$@" | grep -Ev "$MAVEN_EXCLUDE_ARTIFACT_RESOLUTION_MESSAGES"
+}
+# shellcheck disable=SC2120
+function mvn_upgrade_properties() {
+  MAVEN_OPTS="${MAVEN_COLOR_MAVEN_OPTS}" mvn "$MAVEN_COLOR_ARG" -B versions:update-properties -DgenerateBackupPoms=false "$@" | grep -Ev "$MAVEN_EXCLUDE_ARTIFACT_RESOLUTION_MESSAGES"
+}
+##################################################################################################################################################
+
+mvn_args=(
+  -Dstyle.color=always --non-recursive -Dexcludes="$(join_by ":*," "${EXCLUDE_DEPENDENCIES[@]}"):*" -DexcludeProperties="$(join_by "," "${EXCLUDE_PROPERTIES[@]}")"
+)
+
+echo_with_sep "Checking for dependency updates..."
+mvn_dep_updates "${mvn_args[@]}"
+if confirm "Upgrade dependencies?"; then
+  mvn_upgrade_deps "${mvn_args[@]}"
+fi
+
+echo_with_sep "Checking for dependency version property updates..."
+if mvn_property_updates "${mvn_args[@]}"; then
+  if confirm "Upgrade properties?"; then
+    mvn_upgrade_properties "${mvn_args[@]}"
+  fi
+else
+  echo_with_sep "NO PROPERTY UPDATES"
+fi
