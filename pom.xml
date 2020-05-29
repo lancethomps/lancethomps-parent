@@ -584,27 +584,29 @@
             <dependency>
               <groupId>com.lancethomps</groupId>
               <artifactId>lancethomps-build-tools</artifactId>
-              <version>${project.version}</version>
+              <version>1.0.0-SNAPSHOT</version>
             </dependency>
           </dependencies>
+          <configuration>
+            <consoleOutput>true</consoleOutput>
+            <encoding>UTF-8</encoding>
+            <failOnViolation>true</failOnViolation>
+            <logViolationsToConsole>true</logViolationsToConsole>
+            <outputFileFormat>xml</outputFileFormat>
+            <propertyExpansion>basedir=${project.basedir}</propertyExpansion>
+          </configuration>
           <executions>
             <execution>
               <id>validate-java</id>
               <phase>validate</phase>
               <configuration>
+                <cacheFile>${project.basedir}/checkstyle-cachefile</cacheFile>
                 <configLocation>checkstyle/java-checkstyle.xml</configLocation>
                 <suppressionsLocation>checkstyle/java-suppressions.xml</suppressionsLocation>
-                <consoleOutput>true</consoleOutput>
-                <encoding>UTF-8</encoding>
-                <failOnViolation>true</failOnViolation>
                 <includeResources>false</includeResources>
                 <includeTestSourceDirectory>true</includeTestSourceDirectory>
                 <includes>**/*.java</includes>
-                <logViolationsToConsole>true</logViolationsToConsole>
                 <outputFile>${project.build.directory}/checkstyle-report-java.xml</outputFile>
-                <outputFileFormat>xml</outputFileFormat>
-                <propertyExpansion>basedir=${basedir}</propertyExpansion>
-                <propertyExpansion>samedir=${project.basedir}/src/test/resources/checkstyle</propertyExpansion>
               </configuration>
               <goals>
                 <goal>check</goal>
@@ -614,19 +616,13 @@
               <id>validate-java-import-control</id>
               <phase>none</phase>
               <configuration>
+                <cacheFile>${project.basedir}/checkstyle-cachefile-import-control-only</cacheFile>
                 <configLocation>checkstyle/java-checkstyle-import-control-only.xml</configLocation>
                 <suppressionsLocation>checkstyle/java-suppressions.xml</suppressionsLocation>
-                <consoleOutput>true</consoleOutput>
-                <encoding>UTF-8</encoding>
-                <failOnViolation>true</failOnViolation>
                 <includeResources>false</includeResources>
                 <includeTestSourceDirectory>true</includeTestSourceDirectory>
                 <includes>**/*.java</includes>
-                <logViolationsToConsole>true</logViolationsToConsole>
                 <outputFile>${project.build.directory}/checkstyle-report-java-import-control-only.xml</outputFile>
-                <outputFileFormat>xml</outputFileFormat>
-                <propertyExpansion>basedir=${basedir}</propertyExpansion>
-                <propertyExpansion>samedir=${project.basedir}/src/test/resources/checkstyle</propertyExpansion>
               </configuration>
               <goals>
                 <goal>check</goal>
@@ -636,18 +632,12 @@
               <id>validate-non-java</id>
               <phase>validate</phase>
               <configuration>
+                <cacheFile>${project.basedir}/checkstyle-cachefile-non-java</cacheFile>
                 <configLocation>checkstyle/non-java-checkstyle.xml</configLocation>
                 <suppressionsLocation>checkstyle/non-java-suppressions.xml</suppressionsLocation>
-                <consoleOutput>true</consoleOutput>
-                <encoding>UTF-8</encoding>
-                <failOnViolation>true</failOnViolation>
                 <includeResources>false</includeResources>
                 <includeTestSourceDirectory>false</includeTestSourceDirectory>
-                <logViolationsToConsole>true</logViolationsToConsole>
                 <outputFile>${project.build.directory}/checkstyle-report-non-java.xml</outputFile>
-                <outputFileFormat>xml</outputFileFormat>
-                <propertyExpansion>basedir=${project.basedir}</propertyExpansion>
-                <propertyExpansion>samedir=${project.basedir}/src/test/resources/checkstyle</propertyExpansion>
                 <sourceDirectories>
                   ${project.basedir}/src
                 </sourceDirectories>

@@ -3,10 +3,13 @@
 <module name="Checker">
   <property name="severity" value="error" />
   <property name="charset" value="UTF-8" />
+  <property name="cacheFile" value="${basedir}/checkstyle-cachefile-non-java"/>
 
   <module name="SuppressionFilter">
-    <property name="file" value="${samedir}/non-java-suppressions.xml" />
+    <property name="file" value="${basedir}/src/test/resources/checkstyle/non-java-suppressions.xml" />
+    <property name="optional" value="true" />
   </module>
+
   <module name="SuppressWithPlainTextCommentFilter">
     <property name="offCommentFormat" value="CHECKSTYLE\.OFF\: ([\w\|\.\*]+)"/>
     <property name="onCommentFormat" value="CHECKSTYLE\.ON\: ([\w\|\.\*]+)"/>

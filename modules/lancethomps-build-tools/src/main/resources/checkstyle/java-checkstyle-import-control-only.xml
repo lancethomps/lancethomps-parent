@@ -3,13 +3,14 @@
 <module name="Checker">
   <property name="severity" value="error"/>
   <property name="charset" value="UTF-8"/>
+  <property name="cacheFile" value="${basedir}/checkstyle-cachefile-import-control-only"/>
 
   <module name="Translation">
     <property name="severity" value="error"/>
   </module>
 
   <module name="SuppressionFilter">
-    <property name="file" value="${samedir}/java-suppressions.xml"/>
+    <property name="file" value="${basedir}/src/test/resources/checkstyle/java-suppressions.xml"/>
     <property name="optional" value="true"/>
   </module>
 
@@ -29,7 +30,7 @@
     </module>
     <module name="ImportControl">
       <property name="id" value="ImportControl"/>
-      <property name="file" value="/checkstyle/import-control.xml"/>
+      <property name="file" value="${basedir}/src/test/resources/checkstyle/import-control.xml"/>
       <property name="path" value="^.*[\\/]src[\\/]main[\\/].*$"/>
     </module>
   </module>
