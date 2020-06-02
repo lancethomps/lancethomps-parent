@@ -5,6 +5,7 @@ set -o errexit -o errtrace -o nounset
 ##################################################################################################################################################
 # shellcheck disable=SC2155
 export GPG_TTY="$(tty)"
+export vers_bump_type="minor"
 
 ################################################################### USAGE ########################################################################
 _SCRIPT_NAME="$(basename "$0")"
@@ -15,12 +16,13 @@ NAME
        ${_SCRIPT_NAME}
 
 SYNOPSIS
-       ${_SCRIPT_NAME} [--auto-confirm] [--test]
+       ${_SCRIPT_NAME} [--auto-confirm] [--bump-major] [--bump-minor] [--bump-patch] [--test]
           [--help] [--debug] [--verbose]
 
 EXAMPLES
        ${_SCRIPT_NAME}
        ${_SCRIPT_NAME} --auto-confirm
+       ${_SCRIPT_NAME} --bump-patch
        ${_SCRIPT_NAME} --test
 EOF
 }
@@ -44,6 +46,18 @@ while test $# -gt 0; do
     --auto-confirm)
       shift
       auto_confirm=true
+      ;;
+    --bump-major)
+      vers_bump_type="major"
+      shift
+      ;;
+    --bump-minor)
+      vers_bump_type="minor"
+      shift
+      ;;
+    --bump-patch)
+      vers_bump_type="patch"
+      shift
       ;;
     --test)
       shift
@@ -74,7 +88,10 @@ function __custom_store_versions() {
   VERSION_FILE=':(glob)**/pom.xml'
   CURR_VERS="$(make echo-version-current-release)"
   if test -z "${NEXT_VERS-}"; then
-    NEXT_VERS="$(make echo-version-next-minor)"
+    if ! NEXT_VERS="$(make "echo-version-next-${vers_bump_type}")"; then
+      echo "Failed to create NEXT_VERS"
+      exiting
+    fi
   fi
   export VERSION_FILE CURR_VERS NEXT_VERS
 }
@@ -99,9 +116,9 @@ function __custom_publish() {
 
 function __custom_next_version_bump() {
   if check_debug; then
-    echo make version-bump-minor-snapshot
+    echo make "version-bump-${vers_bump_type}-snapshot"
   else
-    make version-bump-minor-snapshot
+    make "version-bump-${vers_bump_type}-snapshot"
   fi
 }
 ##################################################################################################################################################
