@@ -1,3 +1,8 @@
 language: java
 jdk:
+- openjdk8
 - openjdk11
+install:
+- mvn --batch-mode --show-version install -P quick
+script:
+- mvn --batch-mode --show-version clean verify
