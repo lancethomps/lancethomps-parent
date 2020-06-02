@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.lancethomps</groupId>
   <artifactId>lancethomps-parent</artifactId>
-  <version>1.4.0</version>
+  <version>1.5.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-
   <name>${project.groupId}:${project.artifactId}</name>
   <description>Shared Maven configuration for com.lancethomps Maven repos</description>
   <url>https://github.com/lancethomps/lancethomps-parent</url>
-
   <licenses>
     <license>
       <name>The Apache License, Version 2.0</name>
       <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
     </license>
   </licenses>
-
   <developers>
     <developer>
       <name>Lance Thompson</name>
@@ -25,92 +21,35 @@
       <organizationUrl>https://github.com/lancethomps</organizationUrl>
     </developer>
   </developers>
-
+  <prerequisites>
+    <maven>3.6+</maven>
+  </prerequisites>
+  <modules>
+    <module>modules/lancethomps-build-tools</module>
+  </modules>
   <scm>
     <connection>scm:git:ssh://git@github.com:lancethomps/lancethomps-parent.git</connection>
     <developerConnection>scm:git:ssh://git@github.com:lancethomps/lancethomps-parent.git</developerConnection>
     <url>https://github.com/lancethomps/lancethomps-parent</url>
   </scm>
-
-  <prerequisites>
-    <maven>3.6+</maven>
-  </prerequisites>
-
   <distributionManagement>
+    <repository>
+      <id>sonatype-releases</id>
+      <url>https://oss.sonatype.org/content/repositories/releases</url>
+    </repository>
     <snapshotRepository>
       <id>ossrh</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
-    <repository>
-      <id>sonatype-releases</id>
-      <url>https://oss.sonatype.org/content/repositories/releases</url>
-    </repository>
   </distributionManagement>
-
-  <repositories>
-    <repository>
-      <id>maven-central</id>
-      <url>https://repo1.maven.org/maven2</url>
-      <releases>
-        <enabled>true</enabled>
-        <updatePolicy>never</updatePolicy>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>sonatype-releases</id>
-      <url>https://oss.sonatype.org/content/repositories/releases</url>
-      <releases>
-        <enabled>true</enabled>
-        <updatePolicy>never</updatePolicy>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-
-  <pluginRepositories>
-    <pluginRepository>
-      <id>maven-central</id>
-      <url>https://repo1.maven.org/maven2</url>
-      <layout>default</layout>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <releases>
-        <updatePolicy>never</updatePolicy>
-      </releases>
-    </pluginRepository>
-    <pluginRepository>
-      <id>maven-central-alt</id>
-      <url>https://repo.maven.apache.org/maven2</url>
-      <layout>default</layout>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <releases>
-        <updatePolicy>never</updatePolicy>
-      </releases>
-    </pluginRepository>
-  </pluginRepositories>
-
-  <modules>
-    <module>modules/lancethomps-build-tools</module>
-  </modules>
-
   <properties>
     <java.level>1.8</java.level>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss z</maven.build.timestamp.format>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <tests.timeout>500</tests.timeout>
-
     <skip.tests.integration>false</skip.tests.integration>
     <skip.tests.unit>false</skip.tests.unit>
   </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -234,8 +173,8 @@
         <version>2.11.0</version>
         <exclusions>
           <exclusion>
-            <groupId>*</groupId>
             <artifactId>validation-api</artifactId>
+            <groupId>*</groupId>
           </exclusion>
         </exclusions>
       </dependency>
@@ -254,7 +193,6 @@
         <artifactId>log4j-slf4j-impl</artifactId>
         <version>2.13.3</version>
       </dependency>
-
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-beans</artifactId>
@@ -270,15 +208,14 @@
         <artifactId>commons-net</artifactId>
         <version>3.6</version>
       </dependency>
-
       <dependency>
         <groupId>com.googlecode.java-diff-utils</groupId>
         <artifactId>diffutils</artifactId>
         <version>1.3.0</version>
         <exclusions>
           <exclusion>
-            <groupId>*</groupId>
             <artifactId>*</artifactId>
+            <groupId>*</groupId>
           </exclusion>
         </exclusions>
       </dependency>
@@ -297,7 +234,6 @@
         <artifactId>commons-jcs-core</artifactId>
         <version>2.2.1</version>
       </dependency>
-
       <!-- ******************************************************************** -->
       <!-- Serialization -->
       <!-- ******************************************************************** -->
@@ -312,8 +248,8 @@
         <version>1.2.0</version>
         <exclusions>
           <exclusion>
-            <groupId>*</groupId>
             <artifactId>*</artifactId>
+            <groupId>*</groupId>
           </exclusion>
         </exclusions>
       </dependency>
@@ -342,7 +278,6 @@
         <artifactId>snakeyaml</artifactId>
         <version>1.26</version>
       </dependency>
-
       <!-- ******************************************************************** -->
       <!-- Expressions -->
       <!-- ******************************************************************** -->
@@ -361,7 +296,6 @@
         <artifactId>compiler</artifactId>
         <version>0.9.6</version>
       </dependency>
-
       <!-- ******************************************************************** -->
       <!-- Web -->
       <!-- ******************************************************************** -->
@@ -371,8 +305,8 @@
         <version>2.2.0.0</version>
         <exclusions>
           <exclusion>
-            <groupId>*</groupId>
             <artifactId>*</artifactId>
+            <groupId>*</groupId>
           </exclusion>
         </exclusions>
       </dependency>
@@ -386,7 +320,6 @@
         <artifactId>uap-java</artifactId>
         <version>1.4.3</version>
       </dependency>
-
       <!-- ******************************************************************** -->
       <!-- Metrics -->
       <!-- ******************************************************************** -->
@@ -430,7 +363,6 @@
         <artifactId>metrics-legacy-adapter-healthchecks</artifactId>
         <version>5.0.0</version>
       </dependency>
-
       <dependency>
         <groupId>commons-beanutils</groupId>
         <artifactId>commons-beanutils</artifactId>
@@ -462,12 +394,11 @@
         <version>0.9.12</version>
         <exclusions>
           <exclusion>
-            <groupId>*</groupId>
             <artifactId>*</artifactId>
+            <groupId>*</groupId>
           </exclusion>
         </exclusions>
       </dependency>
-
       <!-- TESTS -->
       <dependency>
         <groupId>junit</groupId>
@@ -499,7 +430,6 @@
         <version>4.2.0</version>
         <scope>test</scope>
       </dependency>
-
       <!-- PROVIDED -->
       <dependency>
         <groupId>javax.servlet</groupId>
@@ -509,10 +439,121 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
+  <repositories>
+    <repository>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>maven-central</id>
+      <url>https://repo1.maven.org/maven2</url>
+    </repository>
+    <repository>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>sonatype-releases</id>
+      <url>https://oss.sonatype.org/content/repositories/releases</url>
+    </repository>
+    <repository>
+      <id>sonatype-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <releases>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>maven-central</id>
+      <url>https://repo1.maven.org/maven2</url>
+      <layout>default</layout>
+    </pluginRepository>
+    <pluginRepository>
+      <releases>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>maven-central-alt</id>
+      <url>https://repo.maven.apache.org/maven2</url>
+      <layout>default</layout>
+    </pluginRepository>
+  </pluginRepositories>
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.json</include>
+          <include>**/*.txt</include>
+          <include>**/*.xml</include>
+          <include>**/*.yaml</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
+    <testResources>
+      <testResource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.json</include>
+          <include>**/*.txt</include>
+          <include>**/*.xml</include>
+          <include>**/*.yaml</include>
+        </includes>
+      </testResource>
+      <testResource>
+        <directory>src/test/java</directory>
+        <includes>
+          <include>**/*.json</include>
+          <include>**/*.txt</include>
+          <include>**/*.xml</include>
+          <include>**/*.yaml</include>
+        </includes>
+      </testResource>
+      <testResource>
+        <directory>src/test/resources</directory>
+      </testResource>
+    </testResources>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>com.github.ekryd.sortpom</groupId>
+          <artifactId>sortpom-maven-plugin</artifactId>
+          <version>2.11.0</version>
+          <executions>
+            <execution>
+              <phase>validate</phase>
+              <goals>
+                <goal>sort</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <createBackupFile>false</createBackupFile>
+            <expandEmptyElements>false</expandEmptyElements>
+          </configuration>
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
@@ -571,6 +612,16 @@
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>3.0.0-M1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>3.0.0-M1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.2.0</version>
         </plugin>
@@ -595,7 +646,7 @@
             <dependency>
               <groupId>com.lancethomps</groupId>
               <artifactId>lancethomps-build-tools</artifactId>
-              <version>1.4.0</version>
+              <version>1.5.0-SNAPSHOT</version>
             </dependency>
           </dependencies>
           <configuration>
@@ -610,8 +661,93 @@
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>3.0.0-M1</version>
+          <executions>
+            <execution>
+              <id>validate-enforcer</id>
+              <phase>validate</phase>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+            </execution>
+          </executions>
+          <dependencies>
+            <dependency>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>extra-enforcer-rules</artifactId>
+              <version>1.2</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <rules>
+              <banCircularDependencies />
+              <requireJavaVersion>
+                <version>${java.level}</version>
+              </requireJavaVersion>
+              <requireUpperBoundDeps />
+            </rules>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
           <version>3.1.1</version>
+          <executions>
+            <execution>
+              <id>validate-java</id>
+              <phase>validate</phase>
+              <goals>
+                <goal>check</goal>
+              </goals>
+              <configuration>
+                <cacheFile>${project.basedir}/checkstyle-cachefile</cacheFile>
+                <configLocation>checkstyle/java-checkstyle.xml</configLocation>
+                <includeResources>false</includeResources>
+                <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                <includes>**/*.java</includes>
+                <outputFile>${project.build.directory}/checkstyle-report-java.xml</outputFile>
+              </configuration>
+            </execution>
+            <execution>
+              <id>validate-java-import-control</id>
+              <phase>none</phase>
+              <goals>
+                <goal>check</goal>
+              </goals>
+              <configuration>
+                <cacheFile>${project.basedir}/checkstyle-cachefile-import-control-only</cacheFile>
+                <configLocation>checkstyle/java-checkstyle-import-control-only.xml</configLocation>
+                <includeResources>false</includeResources>
+                <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                <includes>**/*.java</includes>
+                <outputFile>${project.build.directory}/checkstyle-report-java-import-control-only.xml</outputFile>
+              </configuration>
+            </execution>
+            <execution>
+              <id>validate-non-java</id>
+              <phase>validate</phase>
+              <goals>
+                <goal>check</goal>
+              </goals>
+              <configuration>
+                <cacheFile>${project.basedir}/checkstyle-cachefile-non-java</cacheFile>
+                <configLocation>checkstyle/non-java-checkstyle.xml</configLocation>
+                <includeResources>false</includeResources>
+                <includeTestSourceDirectory>false</includeTestSourceDirectory>
+                <outputFile>${project.build.directory}/checkstyle-report-non-java.xml</outputFile>
+                <sourceDirectories>${project.basedir}/src</sourceDirectories>
+                <includes>**/*.ftl,
+                  **/spring-*.xml,
+                  **/conf/*/resources/*.xml,
+                  **/web*.xml</includes>
+                <excludes>**/target/**,
+                  **/thirdparty/**,
+                  **/*.properties,
+                  log4j.jsp</excludes>
+              </configuration>
+            </execution>
+          </executions>
           <dependencies>
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
@@ -626,7 +762,7 @@
             <dependency>
               <groupId>com.lancethomps</groupId>
               <artifactId>lancethomps-build-tools</artifactId>
-              <version>1.4.0</version>
+              <version>1.5.0-SNAPSHOT</version>
             </dependency>
           </dependencies>
           <configuration>
@@ -637,67 +773,6 @@
             <outputFileFormat>xml</outputFileFormat>
             <propertyExpansion>basedir=${project.basedir}</propertyExpansion>
           </configuration>
-          <executions>
-            <execution>
-              <id>validate-java</id>
-              <phase>validate</phase>
-              <configuration>
-                <cacheFile>${project.basedir}/checkstyle-cachefile</cacheFile>
-                <configLocation>checkstyle/java-checkstyle.xml</configLocation>
-                <includeResources>false</includeResources>
-                <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                <includes>**/*.java</includes>
-                <outputFile>${project.build.directory}/checkstyle-report-java.xml</outputFile>
-              </configuration>
-              <goals>
-                <goal>check</goal>
-              </goals>
-            </execution>
-            <execution>
-              <id>validate-java-import-control</id>
-              <phase>none</phase>
-              <configuration>
-                <cacheFile>${project.basedir}/checkstyle-cachefile-import-control-only</cacheFile>
-                <configLocation>checkstyle/java-checkstyle-import-control-only.xml</configLocation>
-                <includeResources>false</includeResources>
-                <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                <includes>**/*.java</includes>
-                <outputFile>${project.build.directory}/checkstyle-report-java-import-control-only.xml</outputFile>
-              </configuration>
-              <goals>
-                <goal>check</goal>
-              </goals>
-            </execution>
-            <execution>
-              <id>validate-non-java</id>
-              <phase>validate</phase>
-              <configuration>
-                <cacheFile>${project.basedir}/checkstyle-cachefile-non-java</cacheFile>
-                <configLocation>checkstyle/non-java-checkstyle.xml</configLocation>
-                <includeResources>false</includeResources>
-                <includeTestSourceDirectory>false</includeTestSourceDirectory>
-                <outputFile>${project.build.directory}/checkstyle-report-non-java.xml</outputFile>
-                <sourceDirectories>
-                  ${project.basedir}/src
-                </sourceDirectories>
-                <includes>
-                  **/*.ftl,
-                  **/spring-*.xml,
-                  **/conf/*/resources/*.xml,
-                  **/web*.xml
-                </includes>
-                <excludes>
-                  **/target/**,
-                  **/thirdparty/**,
-                  **/*.properties,
-                  log4j.jsp
-                </excludes>
-              </configuration>
-              <goals>
-                <goal>check</goal>
-              </goals>
-            </execution>
-          </executions>
         </plugin>
         <!-- Report on code coverage of tests -->
         <plugin>
@@ -708,7 +783,8 @@
             <execution>
               <!-- Prepares a property pointing to the JaCoCo runtime agent -->
               <!-- passed as a VM arg when unit tests (maven-surefire-plugin) executed -->
-              <id>pre-unit-test</id> <!-- important! overrides the parent -->
+              <id>pre-unit-test</id>
+              <!-- important! overrides the parent -->
               <goals>
                 <goal>prepare-agent</goal>
               </goals>
@@ -720,7 +796,8 @@
             </execution>
             <!-- Ensures that the code coverage report for unit tests is created after unit tests have been run. -->
             <execution>
-              <id>post-unit-test</id> <!-- Important! overrides the parent -->
+              <id>post-unit-test</id>
+              <!-- Important! overrides the parent -->
               <phase>test</phase>
               <goals>
                 <goal>report</goal>
@@ -734,7 +811,8 @@
             <execution>
               <!-- Prepares a property pointing to the JaCoCo runtime agent -->
               <!-- passed as a VM arg when integration tests (maven-failsafe-plugin) executed -->
-              <id>pre-integration-test</id> <!-- important! overrides the parent -->
+              <id>pre-integration-test</id>
+              <!-- important! overrides the parent -->
               <goals>
                 <goal>prepare-agent-integration</goal>
               </goals>
@@ -745,7 +823,8 @@
               </configuration>
             </execution>
             <execution>
-              <id>post-integration-test</id> <!-- Important! overrides the parent -->
+              <id>post-integration-test</id>
+              <!-- Important! overrides the parent -->
               <goals>
                 <goal>report-integration</goal>
               </goals>
@@ -780,11 +859,9 @@
             <forkedProcessTimeoutInSeconds>${tests.timeout}</forkedProcessTimeoutInSeconds>
             <parallelTestsTimeoutForcedInSeconds>${tests.timeout}</parallelTestsTimeoutForcedInSeconds>
             <parallelTestsTimeoutInSeconds>${tests.timeout}</parallelTestsTimeoutInSeconds>
-
             <systemPropertyVariables>
               <PROJ_DIR>${project.basedir}</PROJ_DIR>
             </systemPropertyVariables>
-
             <includes>
               <include>**/*Test.java</include>
             </includes>
@@ -813,18 +890,15 @@
             <forkedProcessTimeoutInSeconds>${tests.timeout}</forkedProcessTimeoutInSeconds>
             <parallelTestsTimeoutForcedInSeconds>${tests.timeout}</parallelTestsTimeoutForcedInSeconds>
             <parallelTestsTimeoutInSeconds>${tests.timeout}</parallelTestsTimeoutInSeconds>
-
             <systemPropertyVariables>
               <PROJ_DIR>${project.basedir}</PROJ_DIR>
               <project.build.directory>${project.build.directory}</project.build.directory>
               <project.build.webappDirectory>${project.build.directory}/${project.build.finalName}</project.build.webappDirectory>
               <!-- <webtools.serverType>tomcat</webtools.serverType> -->
             </systemPropertyVariables>
-
             <includes>
               <include>**/*Test.java</include>
             </includes>
-
           </configuration>
         </plugin>
         <plugin>
@@ -884,10 +958,27 @@
             </tagListOptions>
           </configuration>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>1.6</version>
+        </plugin>
+        <plugin>
+          <groupId>org.sonatype.plugins</groupId>
+          <artifactId>nexus-staging-maven-plugin</artifactId>
+          <version>1.6.8</version>
+        </plugin>
       </plugins>
     </pluginManagement>
-
     <plugins>
+      <plugin>
+        <groupId>com.github.ekryd.sortpom</groupId>
+        <artifactId>sortpom-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -910,47 +1001,7 @@
         <artifactId>jacoco-maven-plugin</artifactId>
       </plugin>
     </plugins>
-
-    <testResources>
-      <testResource>
-        <directory>src/main/java</directory>
-        <includes>
-          <include>**/*.json</include>
-          <include>**/*.txt</include>
-          <include>**/*.xml</include>
-          <include>**/*.yaml</include>
-        </includes>
-      </testResource>
-      <testResource>
-        <directory>src/test/java</directory>
-        <includes>
-          <include>**/*.json</include>
-          <include>**/*.txt</include>
-          <include>**/*.xml</include>
-          <include>**/*.yaml</include>
-        </includes>
-      </testResource>
-      <testResource>
-        <directory>src/test/resources</directory>
-      </testResource>
-    </testResources>
-
-    <resources>
-      <resource>
-        <directory>src/main/java</directory>
-        <includes>
-          <include>**/*.json</include>
-          <include>**/*.txt</include>
-          <include>**/*.xml</include>
-          <include>**/*.yaml</include>
-        </includes>
-      </resource>
-      <resource>
-        <directory>src/main/resources</directory>
-      </resource>
-    </resources>
   </build>
-
   <reporting>
     <plugins>
       <plugin>
@@ -967,6 +1018,13 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>checkstyle</report>
+            </reports>
+          </reportSet>
+        </reportSets>
         <configuration>
           <configLocation>checkstyle/java-checkstyle.xml</configLocation>
           <suppressionsLocation>checkstyle/java-suppressions.xml</suppressionsLocation>
@@ -984,13 +1042,6 @@
           <outputFile>${project.build.directory}/checkstyle-report-java.xml</outputFile>
           <outputFileFormat>xml</outputFileFormat>
         </configuration>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>checkstyle</report>
-            </reports>
-          </reportSet>
-        </reportSets>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -1026,10 +1077,10 @@
           </reportSet>
           <reportSet>
             <id>jxr-report-aggregate</id>
-            <inherited>false</inherited>
             <reports>
               <report>aggregate</report>
             </reports>
+            <inherited>false</inherited>
           </reportSet>
         </reportSets>
       </plugin>
@@ -1066,10 +1117,10 @@
         <reportSets>
           <reportSet>
             <id>jdepend-report</id>
-            <inherited>true</inherited>
             <reports>
               <report>generate-no-fork</report>
             </reports>
+            <inherited>true</inherited>
           </reportSet>
         </reportSets>
       </plugin>
@@ -1099,24 +1150,25 @@
           </reportSet>
           <reportSet>
             <id>taglist-report-aggregate</id>
+            <reports>
+              <report>taglist</report>
+            </reports>
             <inherited>false</inherited>
             <configuration>
               <aggregate>true</aggregate>
             </configuration>
-            <reports>
-              <report>taglist</report>
-            </reports>
           </reportSet>
         </reportSets>
       </plugin>
     </plugins>
   </reporting>
-
   <profiles>
     <profile>
       <id>quick</id>
       <properties>
         <checkstyle.skip>true</checkstyle.skip>
+        <enforcer.skip>true</enforcer.skip>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
         <pmd.skip>true</pmd.skip>
         <skip.tests.integration>true</skip.tests.integration>
         <skip.tests.unit>true</skip.tests.unit>
@@ -1188,7 +1240,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.6</version>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
@@ -1202,7 +1253,6 @@
           <plugin>
             <groupId>org.sonatype.plugins</groupId>
             <artifactId>nexus-staging-maven-plugin</artifactId>
-            <version>1.6.8</version>
             <extensions>true</extensions>
             <configuration>
               <serverId>ossrh</serverId>
@@ -1214,5 +1264,4 @@
       </build>
     </profile>
   </profiles>
-
 </project>
