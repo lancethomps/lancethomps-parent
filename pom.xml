@@ -462,6 +462,16 @@
       <id>sonatype-releases</id>
       <url>https://oss.sonatype.org/content/repositories/releases</url>
     </repository>
+    <repository>
+      <id>sonatype-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
   </repositories>
   <pluginRepositories>
     <pluginRepository>
@@ -1158,6 +1168,7 @@
       <properties>
         <checkstyle.skip>true</checkstyle.skip>
         <enforcer.skip>true</enforcer.skip>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
         <pmd.skip>true</pmd.skip>
         <skip.tests.integration>true</skip.tests.integration>
         <skip.tests.unit>true</skip.tests.unit>
