@@ -682,9 +682,6 @@
           <configuration>
             <rules>
               <banCircularDependencies />
-              <requireJavaVersion>
-                <version>${java.level}</version>
-              </requireJavaVersion>
               <requireUpperBoundDeps />
             </rules>
           </configuration>
