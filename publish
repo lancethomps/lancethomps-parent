@@ -63,17 +63,10 @@ while test $# -gt 0; do
       shift
       test_mode=true
       ;;
-    --)
-      shift
-      break
-      ;;
-    -*)
+    *)
       echo "Unknown option: $1"
       _usage
       exit 1
-      ;;
-    *)
-      break
       ;;
   esac
 done
