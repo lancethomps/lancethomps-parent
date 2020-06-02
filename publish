@@ -81,7 +81,11 @@ done
 
 #################################################################### CUSTOM ######################################################################
 function __custom_clean_local() {
-  git clean -Xd --force -- 'target' '**/target'
+  local target_dirs target_dirs_add
+  target_dirs=(target)
+  mapfile -t target_dirs_add < <(git ls-files --others --ignored --exclude-standard --directory -- ':(glob)**/target/**')
+  target_dirs+=("${target_dirs_add[@]}")
+  git clean -Xd --force -- "${target_dirs[@]}"
 }
 
 function __custom_store_versions() {
