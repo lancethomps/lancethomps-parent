@@ -83,7 +83,11 @@ function __custom_clean_local() {
 
 function __custom_store_versions() {
   VERSION_FILE=':(glob)**/pom.xml'
-  CURR_VERS="$(make echo-version-current-release)"
+  if check_test; then
+    CURR_VERS="$(make echo-version-current)"
+  else
+    CURR_VERS="$(make echo-version-current-release)"
+  fi
   if test -z "${NEXT_VERS-}"; then
     if ! NEXT_VERS="$(make "echo-version-next-${vers_bump_type}")"; then
       echo "Failed to create NEXT_VERS"
