@@ -21,11 +21,9 @@
       <organizationUrl>https://github.com/lancethomps</organizationUrl>
     </developer>
   </developers>
-  <prerequisites>
-    <maven>3.6+</maven>
-  </prerequisites>
   <modules>
     <module>modules/lancethomps-build-tools</module>
+    <module>modules/lancethomps-java-cli</module>
   </modules>
   <scm>
     <connection>scm:git:ssh://git@github.com:lancethomps/lancethomps-parent.git</connection>
@@ -681,7 +679,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
-          <version>3.0.0-M1</version>
+          <version>3.0.0-M3</version>
           <executions>
             <execution>
               <id>validate-enforcer</id>
@@ -701,6 +699,10 @@
           <configuration>
             <rules>
               <banCircularDependencies />
+              <!-- NB: requireMavenVersion is necessary to get versions:display-plugin-updates to run correctly. -->
+              <requireMavenVersion>
+                <version>[3.6.0,)</version>
+              </requireMavenVersion>
               <requireUpperBoundDeps />
             </rules>
           </configuration>
