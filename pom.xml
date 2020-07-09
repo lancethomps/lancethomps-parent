@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.lancethomps</groupId>
   <artifactId>lancethomps-parent</artifactId>
-  <version>1.10.0-SNAPSHOT</version>
+  <version>1.9.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>${project.groupId}:${project.artifactId}</name>
   <description>Shared Maven configuration for com.lancethomps Maven repos</description>
@@ -682,7 +682,7 @@
             <dependency>
               <groupId>com.lancethomps</groupId>
               <artifactId>lancethomps-build-tools</artifactId>
-              <version>1.10.0-SNAPSHOT</version>
+              <version>1.9.2-SNAPSHOT</version>
             </dependency>
           </dependencies>
           <configuration>
@@ -847,7 +847,7 @@
             <dependency>
               <groupId>com.lancethomps</groupId>
               <artifactId>lancethomps-build-tools</artifactId>
-              <version>1.10.0-SNAPSHOT</version>
+              <version>1.9.2-SNAPSHOT</version>
             </dependency>
           </dependencies>
           <configuration>
