@@ -9,6 +9,10 @@ os:
 
 dist: xenial
 
+cache:
+  directories:
+  - $HOME/.m2
+
 install:
 - mvn --batch-mode --show-version clean install -P quick
 

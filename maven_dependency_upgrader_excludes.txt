@@ -1,4 +1,7 @@
-commons-collections:commons-collections
 com.opencsv:opencsv
+com.sun.xml.bind:jaxb-impl
+commons-collections:commons-collections
+jakarta.activation:jakarta.activation-api
+jakarta.xml.bind:jakarta.xml.bind-api
 org.apache.poi
 org.springframework
