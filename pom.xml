@@ -741,9 +741,6 @@
                   <exclude>stax:stax-api</exclude>
                 </excludes>
               </bannedDependencies>
-              <requireJavaVersion>
-                <version>${java.level}</version>
-              </requireJavaVersion>
               <!-- NB: requireMavenVersion is necessary to get versions:display-plugin-updates to run correctly. -->
               <requireMavenVersion>
                 <version>[3.6.0,)</version>
