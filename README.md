@@ -1,3 +1,3 @@
 # Shared Maven configuration for com.lancethomps Maven repos
 
-[![Build Status](https://travis-ci.org/lancethomps/lancethomps-parent.svg?branch=main)](https://travis-ci.org/lancethomps/lancethomps-parent)
+[![Build](https://github.com/lancethomps/lancethomps-parent/actions/workflows/build.yml/badge.svg)](https://github.com/lancethomps/lancethomps-parent/actions/workflows/build.yml)
